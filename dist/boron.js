@@ -1,4 +1,14 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var o;"undefined"!=typeof window?o=window:"undefined"!=typeof global?o=global:"undefined"!=typeof self&&(o=self),o.Boron=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = {
+    DropModal: require('./DropModal'),
+    WaveModal: require('./WaveModal'),
+    FlyModal: require('./FlyModal'),
+    FadeModal: require('./FadeModal'),
+    ScaleModal: require('./ScaleModal'),
+    OutlineModal: require('./OutlineModal'),
+}
+
+},{"./DropModal":10,"./FadeModal":11,"./FlyModal":12,"./OutlineModal":13,"./ScaleModal":14,"./WaveModal":15}],2:[function(require,module,exports){
 'use strict';
 
 var getVendorPropertyName = require('./getVendorPropertyName');
@@ -30,12 +40,12 @@ module.exports = function(target, sources) {
   return prefixed
 }
 
-},{"./getVendorPropertyName":4}],2:[function(require,module,exports){
+},{"./getVendorPropertyName":5}],3:[function(require,module,exports){
 'use strict';
 
 module.exports = document.createElement('div').style;
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 var cssVendorPrefix;
@@ -50,7 +60,7 @@ module.exports = function() {
   return cssVendorPrefix = '-' + pre + '-';
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var builtinStyle = require('./builtinStyle');
@@ -89,7 +99,7 @@ module.exports = function(prop, isSupportTest) {
 
 }
 
-},{"./builtinStyle":2}],5:[function(require,module,exports){
+},{"./builtinStyle":3}],6:[function(require,module,exports){
 'use strict';
 
 var insertRule = require('./insertRule');
@@ -121,7 +131,7 @@ module.exports = function(keyframes) {
   return name
 }
 
-},{"./getVendorPrefix":3,"./insertRule":6}],6:[function(require,module,exports){
+},{"./getVendorPrefix":4,"./insertRule":7}],7:[function(require,module,exports){
 'use strict';
 
 var extraSheet;
@@ -142,7 +152,7 @@ module.exports = function(css) {
   return extraSheet;
 }
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 /**
@@ -239,38 +249,36 @@ module.exports = {
   }
 };
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
+(function (global){
 /// <reference path="/node_modules/react/dist/react.js"/>
 /// <reference path="/node_modules/react-dom/dist/react-dom.js"/>
-var React = window.React || require("react"), ReactDOM = window.ReactDOM || require("react-dom"); // already been fired; IntelliSense compatibility
+var React = window.React || (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null), ReactDOM = window.ReactDOM || React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED; // already been fired; IntelliSense compatibility
+//React.__NOT_A_SECRET_DOM_AND_I_CAN_USE_COS_I_HAVE_BEEN_FIRED_AND_AM_NOT_AFRAID = React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 module.exports = React.createClass({displayName: "exports",
     render: function () {
-        // alert(1);
         return null;
     },
 
     componentDidMount: function () {
-        var insertion = this.props.insertion || document.body,
-            div = document.createElement("div");
+        var div = document.createElement("div"),
+            insertion = this.props.insertion || document.body;
         if (typeof insertion === "string") {
             insertion = document.querySelector(insertion);
         }
-        ReactDOM.render(React.createElement("div", null, this.props.children), div);
-        insertion.appendChild(div);
+        ReactDOM.render(this.props.children, div, function () {
+            insertion.appendChild(div);
+        });
         this.insertion = insertion;
         this.div = div;
-    },
-
-    componentDidUpdate: function () {
-        ReactDOM.render(React.createElement("div", null, this.props.children), this.div);
-
     },
 
     componentWillUnmount: function () {
         this.insertion.removeChild(this.div);
     }
 });
-},{"react":undefined,"react-dom":undefined}],9:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],10:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
@@ -405,7 +413,7 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],10:[function(require,module,exports){
+},{"./modalFactory.jsx":16,"domkit/appendVendorPrefix":2,"domkit/insertKeyframesRule":6}],11:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
@@ -504,7 +512,7 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],11:[function(require,module,exports){
+},{"./modalFactory.jsx":16,"domkit/appendVendorPrefix":2,"domkit/insertKeyframesRule":6}],12:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
@@ -618,8 +626,9 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],12:[function(require,module,exports){
-var React = require('react');
+},{"./modalFactory.jsx":16,"domkit/appendVendorPrefix":2,"domkit/insertKeyframesRule":6}],13:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
 var modalFactory = require('./modalFactory.jsx');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
@@ -766,7 +775,8 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5,"react":undefined}],13:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./modalFactory.jsx":16,"domkit/appendVendorPrefix":2,"domkit/insertKeyframesRule":6}],14:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
@@ -868,7 +878,7 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],14:[function(require,module,exports){
+},{"./modalFactory.jsx":16,"domkit/appendVendorPrefix":2,"domkit/insertKeyframesRule":6}],15:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
@@ -1112,8 +1122,9 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],15:[function(require,module,exports){
-var React = require('react');
+},{"./modalFactory.jsx":16,"domkit/appendVendorPrefix":2,"domkit/insertKeyframesRule":6}],16:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
 var transitionEvents = require('domkit/transitionEvents');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 var DisplacedElement = require("./DisplacedElement.jsx");
@@ -1293,14 +1304,6 @@ module.exports = function(animation){
     });
 }
 
-},{"./DisplacedElement.jsx":8,"domkit/appendVendorPrefix":1,"domkit/transitionEvents":7,"react":undefined}],"boron":[function(require,module,exports){
-module.exports = {
-    DropModal: require('./DropModal'),
-    WaveModal: require('./WaveModal'),
-    FlyModal: require('./FlyModal'),
-    FadeModal: require('./FadeModal'),
-    ScaleModal: require('./ScaleModal'),
-    OutlineModal: require('./OutlineModal'),
-}
-
-},{"./DropModal":9,"./FadeModal":10,"./FlyModal":11,"./OutlineModal":12,"./ScaleModal":13,"./WaveModal":14}]},{},[]);
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./DisplacedElement.jsx":9,"domkit/appendVendorPrefix":2,"domkit/transitionEvents":8}]},{},[1])(1)
+});

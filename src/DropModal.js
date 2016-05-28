@@ -1,4 +1,4 @@
-var modalFactory = require('./modalFactory');
+var modalFactory = require('./modalFactory.jsx');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 

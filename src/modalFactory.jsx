@@ -1,6 +1,7 @@
 var React = require('react');
 var transitionEvents = require('domkit/transitionEvents');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
+var DisplacedElement = require("./DisplacedElement.jsx");
 
 module.exports = function(animation){
 
@@ -106,7 +107,7 @@ module.exports = function(animation){
                 this.addTransitionListener(node, this.leave);
             }
 
-            return (<span>
+            return (<DisplacedElement>
                 <div ref="modal" style={modalStyle} className={this.props.className}>
                     {sharp}
                     <div ref="content" tabIndex="-1" style={contentStyle}>
@@ -114,7 +115,7 @@ module.exports = function(animation){
                     </div>
                 </div>
                 {backdrop}
-             </span>)
+             </DisplacedElement>)
             ;
         },
 

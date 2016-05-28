@@ -10,9 +10,18 @@ html {
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
 }
+body,
+input,
+button,
+select {
+  font-family: "Segoe UI", Seravek, Roboto, "Myriad Set Pro", Arial, sans-serif;
+}
+pre,
+code {
+  font-family: "Fira Mono", Consolas, Menlo, "Droid Sans Mono", "Source Code Pro", "Lucida Console", monospace;
+}
 body {
   background: #eee;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
   line-height: 1.5;
   color: #2b303b;
@@ -67,6 +76,7 @@ h2 {
 }
 /* Layout */
 .container {
+  padding-top: 36px;
   margin: 0 auto;
   max-width: 960px;
   padding-left: 1em;
@@ -115,22 +125,19 @@ header:before {
 .logo:before {
   content: "B";
   font-size: 140px;
+  font-weight: 600;
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 15px;
   left: 0;
   line-height: 1;
   pointer-events: none;
-}
-main {
-  padding-top: 36px;
 }
 .installer {
   display: inline-block;
   background: #2b303b;
   border: 1px solid #16191F;
   color: #fff;
-  font-family: "Source Code Pro", monospace;
   font-size: 18px;
   line-height: 1.2;
   margin: 0 auto;
