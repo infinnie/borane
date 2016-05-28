@@ -253,24 +253,28 @@ module.exports = {
 (function (global){
 /// <reference path="/node_modules/react/dist/react.js"/>
 /// <reference path="/node_modules/react-dom/dist/react-dom.js"/>
-var React = window.React || (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null), ReactDOM = window.ReactDOM || React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED; // already been fired; IntelliSense compatibility
-//React.__NOT_A_SECRET_DOM_AND_I_CAN_USE_COS_I_HAVE_BEEN_FIRED_AND_AM_NOT_AFRAID = React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+var React = window.React || (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null), ReactDOM = window.ReactDOM || require("react-dom"); // already been fired; IntelliSense compatibility
 module.exports = React.createClass({displayName: "exports",
     render: function () {
+        // alert(1);
         return null;
     },
 
     componentDidMount: function () {
-        var div = document.createElement("div"),
-            insertion = this.props.insertion || document.body;
+        var insertion = this.props.insertion || document.body,
+            div = document.createElement("div");
         if (typeof insertion === "string") {
             insertion = document.querySelector(insertion);
         }
-        ReactDOM.render(this.props.children, div, function () {
-            insertion.appendChild(div);
-        });
+        ReactDOM.render(React.createElement("div", null, this.props.children), div);
+        insertion.appendChild(div);
         this.insertion = insertion;
         this.div = div;
+    },
+
+    componentDidUpdate: function () {
+        ReactDOM.render(React.createElement("div", null, this.props.children), this.div);
+
     },
 
     componentWillUnmount: function () {
@@ -278,7 +282,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],10:[function(require,module,exports){
+},{"react-dom":undefined}],10:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
