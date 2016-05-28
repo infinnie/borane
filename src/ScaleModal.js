@@ -1,5 +1,5 @@
 var modalFactory = require('./modalFactory.jsx');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule = require('./insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 var animation = {
@@ -64,13 +64,12 @@ module.exports = modalFactory({
     },
     getModalStyle: function(willHidden) {
         return appendVendorPrefix({
-            zIndex: 1050,
-            position: "fixed",
             width: "500px",
-            transform: "translate3d(-50%, -50%, 0)",
-            top: "50%",
-            left: "50%"
-        })
+            zIndex: 1050,
+            display: "inline-block",
+            position: "relative",
+            verticalAlign: "middle"
+        });
     },
     getBackdropStyle: function(willHidden) {
         return appendVendorPrefix({

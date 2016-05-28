@@ -255,15 +255,14 @@ module.exports = React.createClass({displayName: "exports",
         if (typeof insertion === "string") {
             insertion = document.querySelector(insertion);
         }
-        ReactDOM.render(React.createElement("div", null, this.props.children), div);
+        ReactDOM.render(React.createElement("div", {className: this.props.className || "", style: this.props.style || {}}, this.props.children), div);
         insertion.appendChild(div);
         this.insertion = insertion;
         this.div = div;
     },
 
     componentDidUpdate: function () {
-        ReactDOM.render(React.createElement("div", null, this.props.children), this.div);
-
+        ReactDOM.render(React.createElement("div", {className: this.props.className || "", style: this.props.style || {}}, this.props.children), this.div);
     },
 
     componentWillUnmount: function () {
@@ -272,7 +271,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 },{"react":undefined,"react-dom":undefined}],9:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule = require('./insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 var animation = {
@@ -289,22 +288,22 @@ var animation = {
     showModalAnimation: insertKeyframesRule({
         '0%': {
             opacity: 0,
-            transform: 'translate3d(-50%, -300px, 0)'
+            transform: 'translate3d(0, -300px, 0)'
         },
         '100%': {
             opacity: 1,
-            transform: 'translate3d(-50%, -50%, 0)'
+            transform: 'translate3d(0,0, 0)'
         }
     }),
 
     hideModalAnimation: insertKeyframesRule({
         '0%': {
             opacity: 1,
-            transform: 'translate3d(-50%, -50%, 0)'
+            transform: 'translate3d(0, 0, 0)'
         },
         '100%': {
             opacity: 0,
-            transform: 'translate3d(-50%, 100px, 0)'
+            transform: 'translate3d(0, 100px, 0)'
         }
     }),
 
@@ -331,6 +330,10 @@ var animation = {
             opacity: 0,
             transform: 'translate3d(0, -20px, 0)'
         },
+        '38%': {
+            opacity: 0,
+            transform: 'translate3d(0, -20px, 0)'
+        },
         '100%': {
             opacity: 1,
             transform: 'translate3d(0, 0, 0)'
@@ -339,6 +342,10 @@ var animation = {
 
     hideContentAnimation: insertKeyframesRule({
         '0%': {
+            opacity: 1,
+            transform: 'translate3d(0, 0, 0)'
+        },
+        '38%': {
             opacity: 1,
             transform: 'translate3d(0, 0, 0)'
         },
@@ -359,25 +366,24 @@ var showContentAnimation = animation.showContentAnimation;
 var hideContentAnimation = animation.hideContentAnimation;
 
 module.exports = modalFactory({
-    getRef: function(willHidden) {
+    getRef: function (willHidden) {
         return 'modal';
     },
-    getModalStyle: function(willHidden) {
+    getModalStyle: function (willHidden) {
         return appendVendorPrefix({
-            position: "fixed",
             width: "500px",
-            transform: "translate3d(-50%, -50%, 0)",
-            top: "50%",
-            left: "50%",
-            backgroundColor: "white",
             zIndex: 1050,
+            display: "inline-block",
+            position: "relative",
+            verticalAlign: "middle",
+            backgroundColor: "white",
             animationDuration: (willHidden ? hideAnimation : showAnimation).animationDuration,
             animationFillMode: 'forwards',
             animationName: willHidden ? hideModalAnimation : showModalAnimation,
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
         })
     },
-    getBackdropStyle: function(willHidden) {
+    getBackdropStyle: function (willHidden) {
         return appendVendorPrefix({
             position: "fixed",
             top: 0,
@@ -392,22 +398,22 @@ module.exports = modalFactory({
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
         });
     },
-    getContentStyle: function(willHidden) {
+    getContentStyle: function (willHidden) {
         return appendVendorPrefix({
             margin: 0,
-            opacity: 0,
-            animationDuration: (willHidden ? hideAnimation : showAnimation).animationDuration,
+            //opacity: 0,
+            animationDuration: parseFloat((willHidden ? hideAnimation : showAnimation).animationDuration) + .25 + "s",
             animationFillMode: 'forwards',
-            animationDelay: '0.25s',
+            //animationDelay: '0.25s',
             animationName: showContentAnimation,
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
         })
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],10:[function(require,module,exports){
+},{"./insertKeyframesRule":15,"./modalFactory.jsx":16,"domkit/appendVendorPrefix":1}],10:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule = require('./insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 var animation = {
@@ -469,13 +475,12 @@ module.exports = modalFactory({
     },
     getModalStyle: function(willHidden) {
         return appendVendorPrefix({
-            zIndex: 1050,
-            position: "fixed",
             width: "500px",
-            transform: "translate3d(-50%, -50%, 0)",
-            top: "50%",
-            left: "50%"
-        })
+            zIndex: 1050,
+            display: "inline-block",
+            position: "relative",
+            verticalAlign: "middle"
+        });
     },
     getBackdropStyle: function(willHidden) {
         return appendVendorPrefix({
@@ -504,9 +509,9 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],11:[function(require,module,exports){
+},{"./insertKeyframesRule":15,"./modalFactory.jsx":16,"domkit/appendVendorPrefix":1}],11:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule = require('./insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 var animation = {
@@ -578,20 +583,19 @@ var showBackdropAnimation = animation.showBackdropAnimation;
 var hideBackdropAnimation = animation.hideBackdropAnimation;
 
 module.exports = modalFactory({
-    getRef: function(willHidden) {
+    getRef: function (willHidden) {
         return 'content';
     },
-    getModalStyle: function(willHidden) {
+    getModalStyle: function (willHidden) {
         return appendVendorPrefix({
-            zIndex: 1050,
-            position: "fixed",
             width: "500px",
-            transform: "translate3d(-50%, -50%, 0)",
-            top: "50%",
-            left: "50%"
-        })
+            zIndex: 1050,
+            display: "inline-block",
+            position: "relative",
+            verticalAlign: "middle"
+        });
     },
-    getBackdropStyle: function(willHidden) {
+    getBackdropStyle: function (willHidden) {
         return appendVendorPrefix({
             position: "fixed",
             top: 0,
@@ -606,7 +610,7 @@ module.exports = modalFactory({
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
         });
     },
-    getContentStyle: function(willHidden) {
+    getContentStyle: function (willHidden) {
         return appendVendorPrefix({
             margin: 0,
             backgroundColor: "white",
@@ -618,10 +622,10 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],12:[function(require,module,exports){
+},{"./insertKeyframesRule":15,"./modalFactory.jsx":16,"domkit/appendVendorPrefix":1}],12:[function(require,module,exports){
 var React = require('react');
 var modalFactory = require('./modalFactory.jsx');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule = require('./insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 var animation = {
@@ -731,13 +735,12 @@ module.exports = modalFactory({
     },
     getModalStyle: function(willHidden) {
         return appendVendorPrefix({
-            zIndex: 1050,
-            position: "fixed",
             width: "500px",
-            transform: "translate3d(-50%, -50%, 0)",
-            top: "50%",
-            left: "50%"
-        })
+            zIndex: 1050,
+            display: "inline-block",
+            position: "relative",
+            verticalAlign: "middle"
+        });
     },
     getBackdropStyle: function(willHidden) {
         return appendVendorPrefix({
@@ -766,9 +769,9 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5,"react":undefined}],13:[function(require,module,exports){
+},{"./insertKeyframesRule":15,"./modalFactory.jsx":16,"domkit/appendVendorPrefix":1,"react":undefined}],13:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule = require('./insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 var animation = {
@@ -833,13 +836,12 @@ module.exports = modalFactory({
     },
     getModalStyle: function(willHidden) {
         return appendVendorPrefix({
-            zIndex: 1050,
-            position: "fixed",
             width: "500px",
-            transform: "translate3d(-50%, -50%, 0)",
-            top: "50%",
-            left: "50%"
-        })
+            zIndex: 1050,
+            display: "inline-block",
+            position: "relative",
+            verticalAlign: "middle"
+        });
     },
     getBackdropStyle: function(willHidden) {
         return appendVendorPrefix({
@@ -868,9 +870,9 @@ module.exports = modalFactory({
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],14:[function(require,module,exports){
+},{"./insertKeyframesRule":15,"./modalFactory.jsx":16,"domkit/appendVendorPrefix":1}],14:[function(require,module,exports){
 var modalFactory = require('./modalFactory.jsx');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule = require('./insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 var animation = {
@@ -1072,20 +1074,19 @@ var showBackdropAnimation = animation.showBackdropAnimation;
 var hideBackdropAnimation = animation.hideBackdropAnimation;
 
 module.exports = modalFactory({
-    getRef: function(willHidden) {
+    getRef: function (willHidden) {
         return 'content';
     },
-    getModalStyle: function(willHidden) {
+    getModalStyle: function (willHidden) {
         return appendVendorPrefix({
-            zIndex: 1050,
-            position: "fixed",
             width: "500px",
-            transform: "translate3d(-50%, -50%, 0)",
-            top: "50%",
-            left: "50%"
-        })
+            zIndex: 1050,
+            display: "inline-block",
+            position: "relative",
+            verticalAlign: "middle"
+        });
     },
-    getBackdropStyle: function(willHidden) {
+    getBackdropStyle: function (willHidden) {
         return appendVendorPrefix({
             position: "fixed",
             top: 0,
@@ -1100,7 +1101,7 @@ module.exports = modalFactory({
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
         });
     },
-    getContentStyle: function(willHidden) {
+    getContentStyle: function (willHidden) {
         return appendVendorPrefix({
             margin: 0,
             backgroundColor: "white",
@@ -1108,17 +1109,26 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationName: willHidden ? hideContentAnimation : showContentAnimation,
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
-        })
+        });
     }
 });
 
-},{"./modalFactory.jsx":15,"domkit/appendVendorPrefix":1,"domkit/insertKeyframesRule":5}],15:[function(require,module,exports){
+},{"./insertKeyframesRule":15,"./modalFactory.jsx":16,"domkit/appendVendorPrefix":1}],15:[function(require,module,exports){
+var insertKeyframesRule = require('domkit/insertKeyframesRule');
+module.exports = function () {
+    try {
+        return insertKeyframesRule.apply(null, arguments);
+    } catch (x) {
+        return {};
+    }
+}
+},{"domkit/insertKeyframesRule":5}],16:[function(require,module,exports){
 var React = require('react');
 var transitionEvents = require('domkit/transitionEvents');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 var DisplacedElement = require("./DisplacedElement.jsx");
 
-module.exports = function(animation){
+module.exports = function (animation) {
 
     return React.createClass({
         propTypes: {
@@ -1135,11 +1145,11 @@ module.exports = function(animation){
             contentStyle: React.PropTypes.object,
         },
 
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 className: "",
-                onShow: function(){},
-                onHide: function(){},
+                onShow: function () { },
+                onHide: function () { },
                 animation: animation,
                 keyboard: true,
                 backdrop: true,
@@ -1150,37 +1160,37 @@ module.exports = function(animation){
             };
         },
 
-        getInitialState: function(){
+        getInitialState: function () {
             return {
                 willHidden: false,
                 hidden: true
             }
         },
 
-        hasHidden: function(){
+        hasHidden: function () {
             return this.state.hidden;
         },
 
-        addTransitionListener: function(node, handle){
+        addTransitionListener: function (node, handle) {
             if (node) {
-              var endListener = function(e) {
-                  if (e && e.target !== node) {
-                      return;
-                  }
-                  transitionEvents.removeEndEventListener(node, endListener);
-                  handle();
-              };
-              transitionEvents.addEndEventListener(node, endListener);
+                var endListener = function (e) {
+                    if (e && e.target !== node) {
+                        return;
+                    }
+                    transitionEvents.removeEndEventListener(node, endListener);
+                    handle();
+                };
+                transitionEvents.addEndEventListener(node, endListener);
             }
         },
 
-        handleBackdropClick: function() {
+        handleBackdropClick: function () {
             if (this.props.closeOnClick) {
                 this.hide();
             }
         },
 
-        render: function() {
+        render: function () {
 
             var hidden = this.hasHidden();
             if (hidden) return null;
@@ -1202,27 +1212,42 @@ module.exports = function(animation){
             }
 
             if (this.props.backdropStyle) {
-              var prefixedBackdropStyle = appendVendorPrefix(this.props.backdropStyle);
+                var prefixedBackdropStyle = appendVendorPrefix(this.props.backdropStyle);
                 for (var style in prefixedBackdropStyle) {
                     backdropStyle[style] = prefixedBackdropStyle[style];
                 }
             }
 
             if (this.props.contentStyle) {
-              var prefixedContentStyle = appendVendorPrefix(this.props.contentStyle);
+                var prefixedContentStyle = appendVendorPrefix(this.props.contentStyle);
                 for (var style in prefixedContentStyle) {
                     contentStyle[style] = prefixedContentStyle[style];
                 }
             }
 
-            var backdrop = this.props.backdrop? React.createElement("div", {style: backdropStyle, onClick: this.props.closeOnClick? this.handleBackdropClick: null}): undefined;
+            var backdrop = this.props.backdrop ? React.createElement("div", {style: backdropStyle, onClick: this.props.closeOnClick ? this.handleBackdropClick : null}) : undefined;
 
-            if(willHidden) {
+            if (willHidden) {
                 var node = this.refs[ref];
                 this.addTransitionListener(node, this.leave);
             }
 
-            return (React.createElement(DisplacedElement, null, 
+            // vertical alignment inspired by AmazeUI
+            return (React.createElement(DisplacedElement, {style: {
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    textAlign: "center",
+                    zIndex: 1040
+                }}, 
+                React.createElement("div", {style: {
+                        display: "inline-block",
+                        height: "100%",
+                        width: 0,
+                        verticalAlign: "middle"
+                    }}), 
                 React.createElement("div", {ref: "modal", style: modalStyle, className: this.props.className}, 
                     sharp, 
                     React.createElement("div", {ref: "content", tabIndex: "-1", style: contentStyle}, 
@@ -1230,22 +1255,22 @@ module.exports = function(animation){
                     )
                 ), 
                 backdrop
-             ))
+            ))
             ;
         },
 
-        leave: function(){
+        leave: function () {
             this.setState({
                 hidden: true
             });
             this.props.onHide();
         },
 
-        enter: function(){
+        enter: function () {
             this.props.onShow();
         },
 
-        show: function(){
+        show: function () {
             if (!this.hasHidden()) return;
 
             this.setState({
@@ -1253,14 +1278,14 @@ module.exports = function(animation){
                 hidden: false
             });
 
-            setTimeout(function(){
-              var ref = this.props.animation.getRef();
-              var node = this.refs[ref];
-              this.addTransitionListener(node, this.enter);
+            setTimeout(function () {
+                var ref = this.props.animation.getRef();
+                var node = this.refs[ref];
+                this.addTransitionListener(node, this.enter);
             }.bind(this), 0);
         },
 
-        hide: function(){
+        hide: function () {
             if (this.hasHidden()) return;
 
             this.setState({
@@ -1268,14 +1293,14 @@ module.exports = function(animation){
             });
         },
 
-        toggle: function(){
+        toggle: function () {
             if (this.hasHidden())
                 this.show();
             else
                 this.hide();
         },
 
-        listenKeyboard: function(event) {
+        listenKeyboard: function (event) {
             if (this.props.keyboard &&
                     (event.key === "Escape" ||
                      event.keyCode === 27)) {
@@ -1283,11 +1308,11 @@ module.exports = function(animation){
             }
         },
 
-        componentDidMount: function(){
+        componentDidMount: function () {
             window.addEventListener("keydown", this.listenKeyboard, true);
         },
 
-        componentWillUnmount: function() {
+        componentWillUnmount: function () {
             window.removeEventListener("keydown", this.listenKeyboard, true);
         }
     });

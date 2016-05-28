@@ -13,15 +13,14 @@ module.exports = React.createClass({
         if (typeof insertion === "string") {
             insertion = document.querySelector(insertion);
         }
-        ReactDOM.render(<div>{this.props.children}</div>, div);
+        ReactDOM.render(<div className={this.props.className || ""} style={this.props.style || {}}>{this.props.children}</div>, div);
         insertion.appendChild(div);
         this.insertion = insertion;
         this.div = div;
     },
 
     componentDidUpdate: function () {
-        ReactDOM.render(<div>{this.props.children}</div>, this.div);
-
+        ReactDOM.render(<div className={this.props.className || ""} style={this.props.style || {}}>{this.props.children}</div>, this.div);
     },
 
     componentWillUnmount: function () {

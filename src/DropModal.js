@@ -1,5 +1,5 @@
 var modalFactory = require('./modalFactory.jsx');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule = require('./insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 var animation = {
@@ -16,22 +16,22 @@ var animation = {
     showModalAnimation: insertKeyframesRule({
         '0%': {
             opacity: 0,
-            transform: 'translate3d(-50%, -300px, 0)'
+            transform: 'translate3d(0, -300px, 0)'
         },
         '100%': {
             opacity: 1,
-            transform: 'translate3d(-50%, -50%, 0)'
+            transform: 'translate3d(0,0, 0)'
         }
     }),
 
     hideModalAnimation: insertKeyframesRule({
         '0%': {
             opacity: 1,
-            transform: 'translate3d(-50%, -50%, 0)'
+            transform: 'translate3d(0, 0, 0)'
         },
         '100%': {
             opacity: 0,
-            transform: 'translate3d(-50%, 100px, 0)'
+            transform: 'translate3d(0, 100px, 0)'
         }
     }),
 
@@ -58,6 +58,10 @@ var animation = {
             opacity: 0,
             transform: 'translate3d(0, -20px, 0)'
         },
+        '38%': {
+            opacity: 0,
+            transform: 'translate3d(0, -20px, 0)'
+        },
         '100%': {
             opacity: 1,
             transform: 'translate3d(0, 0, 0)'
@@ -66,6 +70,10 @@ var animation = {
 
     hideContentAnimation: insertKeyframesRule({
         '0%': {
+            opacity: 1,
+            transform: 'translate3d(0, 0, 0)'
+        },
+        '38%': {
             opacity: 1,
             transform: 'translate3d(0, 0, 0)'
         },
@@ -86,25 +94,24 @@ var showContentAnimation = animation.showContentAnimation;
 var hideContentAnimation = animation.hideContentAnimation;
 
 module.exports = modalFactory({
-    getRef: function(willHidden) {
+    getRef: function (willHidden) {
         return 'modal';
     },
-    getModalStyle: function(willHidden) {
+    getModalStyle: function (willHidden) {
         return appendVendorPrefix({
-            position: "fixed",
             width: "500px",
-            transform: "translate3d(-50%, -50%, 0)",
-            top: "50%",
-            left: "50%",
-            backgroundColor: "white",
             zIndex: 1050,
+            display: "inline-block",
+            position: "relative",
+            verticalAlign: "middle",
+            backgroundColor: "white",
             animationDuration: (willHidden ? hideAnimation : showAnimation).animationDuration,
             animationFillMode: 'forwards',
             animationName: willHidden ? hideModalAnimation : showModalAnimation,
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
         })
     },
-    getBackdropStyle: function(willHidden) {
+    getBackdropStyle: function (willHidden) {
         return appendVendorPrefix({
             position: "fixed",
             top: 0,
@@ -119,13 +126,13 @@ module.exports = modalFactory({
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
         });
     },
-    getContentStyle: function(willHidden) {
+    getContentStyle: function (willHidden) {
         return appendVendorPrefix({
             margin: 0,
-            opacity: 0,
-            animationDuration: (willHidden ? hideAnimation : showAnimation).animationDuration,
+            //opacity: 0,
+            animationDuration: parseFloat((willHidden ? hideAnimation : showAnimation).animationDuration) + .25 + "s",
             animationFillMode: 'forwards',
-            animationDelay: '0.25s',
+            //animationDelay: '0.25s',
             animationName: showContentAnimation,
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
         })

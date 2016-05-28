@@ -1,5 +1,5 @@
 var modalFactory = require('./modalFactory.jsx');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule = require('./insertKeyframesRule');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 var animation = {
@@ -71,20 +71,19 @@ var showBackdropAnimation = animation.showBackdropAnimation;
 var hideBackdropAnimation = animation.hideBackdropAnimation;
 
 module.exports = modalFactory({
-    getRef: function(willHidden) {
+    getRef: function (willHidden) {
         return 'content';
     },
-    getModalStyle: function(willHidden) {
+    getModalStyle: function (willHidden) {
         return appendVendorPrefix({
-            zIndex: 1050,
-            position: "fixed",
             width: "500px",
-            transform: "translate3d(-50%, -50%, 0)",
-            top: "50%",
-            left: "50%"
-        })
+            zIndex: 1050,
+            display: "inline-block",
+            position: "relative",
+            verticalAlign: "middle"
+        });
     },
-    getBackdropStyle: function(willHidden) {
+    getBackdropStyle: function (willHidden) {
         return appendVendorPrefix({
             position: "fixed",
             top: 0,
@@ -99,7 +98,7 @@ module.exports = modalFactory({
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
         });
     },
-    getContentStyle: function(willHidden) {
+    getContentStyle: function (willHidden) {
         return appendVendorPrefix({
             margin: 0,
             backgroundColor: "white",
