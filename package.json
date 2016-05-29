@@ -2,8 +2,8 @@
   "name": "borane",
   "version": "0.2.3",
   "description": "A collection of dialog animations with React.js",
-  "main": "Boron.js",
-  "author": "Yuanyan Cao",
+  "main": "Borane.js",
+  "author": "Yuanyan Cao et al",
   "license": "MIT",
   "repository": {
     "type": "git",

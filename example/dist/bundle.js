@@ -1318,7 +1318,7 @@ module.exports = function (animation) {
     });
 }
 
-},{"./DisplacedElement.jsx":8,"domkit/appendVendorPrefix":1,"domkit/transitionEvents":7,"react":undefined}],"boron":[function(require,module,exports){
+},{"./DisplacedElement.jsx":8,"domkit/appendVendorPrefix":1,"domkit/transitionEvents":7,"react":undefined}],"borane":[function(require,module,exports){
 module.exports = {
     DropModal: require('./DropModal'),
     WaveModal: require('./WaveModal'),
