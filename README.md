@@ -1,16 +1,13 @@
 Borane  [![npm version](https://badge.fury.io/js/borane.svg)](http://badge.fury.io/js/borane)
 =====
 
-[![Pair on this](https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg)](http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=boron)
+Borane is Boron down from IE 9.
 
-A collection of dialog animations with React.js.
-
-* React 0.14+ Use `boron 0.2`
-* React 0.12+ Use `boron 0.1`
+* Only React 0.14+
 
 ## Demo & Examples
 
-Live demo: [yuanyan.github.io/boron](http://yuanyan.github.io/boron/)
+Live demo: https://infinnie.github.io/borane/
 
 To build the examples locally, run:
 
@@ -23,18 +20,18 @@ Then open [`localhost:9999`](http://localhost:9999) in a browser.
 
 ## Installation
 
-The easiest way to use `boron` is to install it from NPM and include it in your own React build process (using [Browserify](http://browserify.org), etc).
+The easiest way to use Borane is to install it from NPM and include it in your own React build process (using [Browserify](http://browserify.org), etc).
 
-You can also use the standalone build by including `dist/boron.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
+You can also use the standalone build by including `dist/borane.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
 
 ```
-npm install boron --save
+npm install borane --save
 ```
 
 ## Usage
 
 ``` javascript
-var Modal = require('boron/DropModal');
+var Modal = require('borane/DropModal');
 var Example = React.createClass({
     showModal: function(){
         this.refs.modal.show();
@@ -74,7 +71,7 @@ The values for the CSS properties will either add new properties or override the
 
 Modal with 80% width:
 ``` javascript
-var Modal = require('boron/ScaleModal');
+var Modal = require('borane/ScaleModal');
 
 // Style object
 var modalStyle = {
@@ -104,7 +101,7 @@ var Example = React.createClass({
 
 Red backdrop with a blue modal, rotated at 45 degrees:
 ``` javascript
-var Modal = require('boron/FlyModal');
+var Modal = require('borane/FlyModal');
 
 // Individual styles for the modal, modal content, and backdrop
 var modalStyle = {
@@ -159,4 +156,4 @@ IE 9+ ✔ | Chrome 4.0+ ✔ | Firefox 16.0+ ✔ | Opera 15.0+ ✔ | Safari 4.0+ 
 
 ## License
 
-Boron is [MIT licensed](./LICENSE).
+Borane is [MIT licensed](./LICENSE).

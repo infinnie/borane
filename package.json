@@ -1,6 +1,6 @@
 {
   "name": "borane",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A collection of dialog animations with React.js",
   "main": "Borane.js",
   "author": "Yuanyan Cao et al",

@@ -10,7 +10,7 @@
 
 <script type="text" id="code1">
 var React = require('react');
-var Boron = require('boron');
+var Borane = require('borane');
 
 var styles = {
   btn: {
@@ -52,7 +52,7 @@ var Example = React.createClass({
     },
 
     getTiggerAndModal: function(modalName){
-        var Modal = Boron[modalName];
+        var Modal = Borane[modalName];
 
         return <div>
         <button style={styles.btn} onClick={this.toggleDialog(modalName)}>Open {modalName}</button>
