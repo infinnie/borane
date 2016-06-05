@@ -123,7 +123,8 @@ module.exports = modalFactory({
             animationDuration: (willHidden ? hideAnimation : showAnimation).animationDuration,
             animationFillMode: 'forwards',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
-            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction,
+            filter:"alpha(opacity=90)" // IE 8, 9
         });
     },
     getContentStyle: function (willHidden) {

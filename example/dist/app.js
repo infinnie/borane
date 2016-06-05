@@ -8,7 +8,11 @@ var selfCleaningTimeout = {
     },
     setTimeout: function() {
         clearTimeout(this.timeoutID);
-        this.timeoutID = setTimeout.apply(null, arguments);
+        try{
+            this.timeoutID = setTimeout.apply(null, arguments);
+        }catch(x){
+            this.timeoutID=setTimeout(arguments[0],arguments[1]);
+        }
     }
 };
 

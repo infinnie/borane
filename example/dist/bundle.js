@@ -395,7 +395,8 @@ module.exports = modalFactory({
             animationDuration: (willHidden ? hideAnimation : showAnimation).animationDuration,
             animationFillMode: 'forwards',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
-            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction,
+            filter:"alpha(opacity=90)" // IE 8, 9
         });
     },
     getContentStyle: function (willHidden) {
@@ -494,7 +495,8 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationDuration: '0.3s',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
-            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction,
+            filter: "alpha(opacity=90)"
         });
     },
     getContentStyle: function(willHidden) {
@@ -607,7 +609,8 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationDuration: '0.3s',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
-            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction,
+            filter: "alpha(opacity=90)"
         });
     },
     getContentStyle: function (willHidden) {
@@ -703,8 +706,8 @@ module.exports = modalFactory({
 
         var sharpStyle = {
             position: 'absolute',
-            width: 'calc(100%)',
-            height: 'calc(100%)',
+            width: '100%', // wonder why calc
+            height: '100%',
             zIndex: '-1'
         };
 
@@ -717,7 +720,7 @@ module.exports = modalFactory({
             strokeDasharray: strokeDashLength
         });
 
-        return React.createElement("div", {style: sharpStyle}, 
+        return ("createElementNS" in document)?(React.createElement("div", {style: sharpStyle}, 
             React.createElement("svg", {
                 xmlns: "http://www.w3.org/2000/svg", 
                 width: "100%", 
@@ -731,7 +734,7 @@ module.exports = modalFactory({
                     width: "492", 
                     height: "132"})
             )
-        )
+        )):null;
     },
     getModalStyle: function(willHidden) {
         return appendVendorPrefix({
@@ -754,7 +757,8 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationDuration: '0.4s',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
-            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction,
+            filter:"alpha(opacity=90)"
         });
     },
     getContentStyle: function(willHidden) {
@@ -855,7 +859,8 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationDuration: '0.4s',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
-            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction,
+            filter: "alpha(opacity=90)"
         });
     },
     getContentStyle: function(willHidden) {
@@ -1098,7 +1103,8 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationDuration: '0.3s',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
-            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction,
+            filter: "alpha(opacity=90)"
         });
     },
     getContentStyle: function (willHidden) {
@@ -1114,7 +1120,10 @@ module.exports = modalFactory({
 });
 
 },{"./insertKeyframesRule":15,"./modalFactory.jsx":16,"domkit/appendVendorPrefix":1}],15:[function(require,module,exports){
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+var insertKeyframesRule;
+try {
+    insertKeyframesRule = require('domkit/insertKeyframesRule');
+} catch (x) { }
 module.exports = function () {
     try {
         return insertKeyframesRule.apply(null, arguments);
@@ -1309,11 +1318,19 @@ module.exports = function (animation) {
         },
 
         componentDidMount: function () {
-            window.addEventListener("keydown", this.listenKeyboard, true);
+            try {
+                window.addEventListener("keydown", this.listenKeyboard, true);
+            } catch (x) {
+                window.attachEvent("onkeydown", this.listenKeyboard);
+            }
         },
 
         componentWillUnmount: function () {
-            window.removeEventListener("keydown", this.listenKeyboard, true);
+            try {
+                window.removeEventListener("keydown", this.listenKeyboard, true);
+            } catch (x) {
+                window.detachEvent("onkeydown", this.listenKeyboard);
+            }
         }
     });
 }

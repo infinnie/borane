@@ -8,115 +8,123 @@
 </head>
 <body>
 
-<script type="text" id="code1">
-var React = require('react');
-var Borane = require('borane');
+    <script type="text" id="code1">
+        var React = require('react');
+        var Borane = require('borane');
 
-var styles = {
-  btn: {
-      margin: '1em auto',
-      padding: '1em 2em',
-      outline: 'none',
-      fontSize: 16,
-      fontWeight: '600',
-      background: '#C94E50',
-      color: '#FFFFFF',
-      border: 'none'
-  },
-  container: {
-      padding: '2em',
-      textAlign: 'center'
-  },
-  title: {
-    margin: 0,
-    color: '#C94E50',
-    fontWeight: 400
-  }
-}
+        var styles = {
+            btn: {
+                margin: '1em auto',
+                padding: '1em 2em',
+                outline: 'none',
+                fontSize: 16,
+                fontWeight: '600',
+                background: '#C94E50',
+                color: '#FFFFFF',
+                border: 'none'
+            },
+            container: {
+                padding: '2em',
+                textAlign: 'center'
+            },
+            title: {
+                margin: 0,
+                color: '#C94E50',
+                fontWeight: 400
+            }
+        }
 
 
-var Example = React.createClass({
+        var Example = React.createClass({
 
-    toggleDialog: function(ref){
+            toggleDialog: function(ref){
 
-        return function(){
-            this.refs[ref].toggle();
-        }.bind(this)
-    },
+                return function(){
+                    this.refs[ref].toggle();
+                }.bind(this)
+            },
 
-    getContent: function(modalName){
-        return <div style={styles.container}>
-        <h2 style={styles.title}><strong>Borane</strong> is <em>not</em> amazing</h2>
-            <button style={styles.btn} onClick={this.toggleDialog(modalName)}>Close</button>
-        </div>
-    },
+            getContent: function(modalName){
+                return (
+                    <div style={styles.container}>
+                        <h2 style={styles.title}><strong>Borane</strong> is <em>not</em> amazing</h2>
+                        <button style={styles.btn} onClick={this.toggleDialog(modalName)}>Close</button>
+                    </div>)
+            },
 
-    getTiggerAndModal: function(modalName){
-        var Modal = Borane[modalName];
+            getTiggerAndModal: function(modalName){
+                var Modal = Borane[modalName];
 
-        return <div>
-        <button style={styles.btn} onClick={this.toggleDialog(modalName)}>Open {modalName}</button>
+                return (
+                    <div>
+                        <button style={styles.btn} onClick={this.toggleDialog(modalName)}>Open {modalName}</button>
 
-        <Modal ref={modalName}>{this.getContent(modalName)}</Modal>
-        </div>
-    },
-    render: function() {
-        var self = this;
+                        <Modal ref={modalName}>{this.getContent(modalName)}</Modal>
+                    </div>
+            )},
+            render: function() {
+                var self = this;
+                return (
+                    <div style={styles.container}>
+                        {['OutlineModal', 'ScaleModal', 'FadeModal', 'FlyModal', 'DropModal', 'WaveModal'].map(function(name){
+                        return self.getTiggerAndModal(name)
+                        })}
+                    </div>
+                );
+            }
+            });
         return (
-            <div style={styles.container}>
-                {['OutlineModal', 'ScaleModal', 'FadeModal', 'FlyModal', 'DropModal', 'WaveModal'].map(function(name){
-                    return self.getTiggerAndModal(name)
-                })}
-            </div>
-        );
-    }
-});
-return <Example/>
-
-</script>
+            <Example />
+        )
+    </script>
 
 
-<header class="row">
-    <div class="container">
-        <h1 class="logo">
-            Borane
-        </h1>
-    </div>
-</header>
-
-<div class="container">
-    <div class="row">
-        <div class="center">
-            <code class="installer">npm install borane</code>
+    <header class="row">
+        <div class="container">
+            <h1 class="logo">
+                Borane
+            </h1>
         </div>
-    </div>
+    </header>
 
-
-    <div class="row">
-        <div class="example" id="example1">loading...</div>
-    </div>
-
-</div>
-
-<footer class="row">
     <div class="container">
-        <p class="center">
-            <a href="https://github.com/infinnie/borane">GitHub</a> &middot; forked from <a href="https://github.com/yuanyan/boron">Boron</a>
-        </p>
+        <div class="row">
+            <div class="center">
+                <code class="installer">npm install borane</code>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="example" id="example1">loading...</div>
+        </div>
+
     </div>
-</footer>
 
-<a href="https://github.com/infinnie/borane"><img style="position: absolute; top: 0; right: 0; border: 0;"
-                                                  src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
-                                                  alt="Fork me on GitHub"
-                                                  data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <footer class="row">
+        <div class="container">
+            <p class="center">
+                <a href="https://github.com/infinnie/borane">GitHub</a> &middot; forked from <a href="https://github.com/yuanyan/boron">Boron</a>
+            </p>
+        </div>
+    </footer>
 
-<script src="codemirror.js"></script>
-<script src="javascript.js"></script>
-<script src="JSXTransformer.js"></script>
+    <a href="https://github.com/infinnie/borane">
+        <img style="position: absolute; top: 0; right: 0; border: 0;"
+             src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
+             alt="Fork me on GitHub"
+             data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+    </a>
+    <!--[if lt IE 9]>
+        <script src="es5-shim.js"></script>
+        <script src="es5-sham.js"></script>
+    <![endif]-->
+    <script src="codemirror.js"></script>
+    <script src="javascript.js"></script>
+    <script src="JSXTransformer.js"></script>
 
-<script src="common.js"></script>
-<script src="bundle.js"></script>
-<script src="app.js"></script>
+    <script src="common.js"></script>
+    <script src="bundle.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

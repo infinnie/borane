@@ -1,6 +1,6 @@
 {
   "name": "borane",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A collection of dialog animations with React.js",
   "main": "Borane.js",
   "author": "Yuanyan Cao et al",
@@ -37,11 +37,14 @@
     "vinyl-paths": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.1",
-    "gulp-react": "^3.0.1"
+    "gulp-react": "^3.0.1",
+    "es5-shim": "^4.5.8",
+    "envify": "^3.4.0"
   },
   "browserify": {
     "transform": [
-      "reactify"
+      "reactify",
+      "envify"
     ]
   },
   "browserify-shim": {

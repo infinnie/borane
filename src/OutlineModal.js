@@ -78,8 +78,8 @@ module.exports = modalFactory({
 
         var sharpStyle = {
             position: 'absolute',
-            width: 'calc(100%)',
-            height: 'calc(100%)',
+            width: '100%', // wonder why calc
+            height: '100%',
             zIndex: '-1'
         };
 
@@ -92,7 +92,7 @@ module.exports = modalFactory({
             strokeDasharray: strokeDashLength
         });
 
-        return <div style = {sharpStyle}>
+        return ("createElementNS" in document)?(<div style = {sharpStyle}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"
@@ -106,7 +106,7 @@ module.exports = modalFactory({
                     width="492"
                     height="132" />
             </svg>
-        </div>
+        </div>):null;
     },
     getModalStyle: function(willHidden) {
         return appendVendorPrefix({
@@ -129,7 +129,8 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationDuration: '0.4s',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
-            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction,
+            filter:"alpha(opacity=90)"
         });
     },
     getContentStyle: function(willHidden) {

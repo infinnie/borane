@@ -225,7 +225,8 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationDuration: '0.3s',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
-            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction,
+            filter: "alpha(opacity=90)"
         });
     },
     getContentStyle: function (willHidden) {

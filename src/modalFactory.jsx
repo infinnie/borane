@@ -184,11 +184,19 @@ module.exports = function (animation) {
         },
 
         componentDidMount: function () {
-            window.addEventListener("keydown", this.listenKeyboard, true);
+            try {
+                window.addEventListener("keydown", this.listenKeyboard, true);
+            } catch (x) {
+                window.attachEvent("onkeydown", this.listenKeyboard);
+            }
         },
 
         componentWillUnmount: function () {
-            window.removeEventListener("keydown", this.listenKeyboard, true);
+            try {
+                window.removeEventListener("keydown", this.listenKeyboard, true);
+            } catch (x) {
+                window.detachEvent("onkeydown", this.listenKeyboard);
+            }
         }
     });
 }

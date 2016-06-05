@@ -38,6 +38,8 @@ var EXAMPLE_DIST_PATH = 'example/dist';
 
 var EXAMPLE_APP = 'app.js';
 var EXAMPLE_COPY = [
+    "node_modules/es5-shim/es5-shim.js",
+    "node_modules/es5-shim/es5-sham.js",
     'node_modules/codemirror/lib/codemirror.js',
     'node_modules/codemirror/lib/codemirror.css',
     'node_modules/codemirror/mode/javascript/javascript.js',
@@ -144,7 +146,9 @@ function buildExampleScripts(dev) {
       watchBundle(example, 'app.js', dest);
     }
 
+    process.env.NODE_ENV="production";
     return merge(
+
       doBundle(common, 'common.js', dest),
       doBundle(bundle, 'bundle.js', dest),
       doBundle(example, 'app.js', dest)
