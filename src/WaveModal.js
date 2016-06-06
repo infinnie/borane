@@ -171,7 +171,7 @@ var animation = {
         '100%': {
             opacity: 0,
             transform: 'scale3d(0.8, 0.8, 1)'
-        },
+        }
     }),
 
     showBackdropAnimation: insertKeyframesRule({
@@ -180,7 +180,7 @@ var animation = {
         },
         '100%': {
             opacity: 0.9
-        },
+        }
     }),
 
     hideBackdropAnimation: insertKeyframesRule({

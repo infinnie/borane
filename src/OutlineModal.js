@@ -14,13 +14,13 @@ var animation = {
     },
     showContentAnimation: insertKeyframesRule({
         '0%': {
-            opacity: 0,
+            opacity: 0
         },
         '40%':{
             opacity: 0
         },
         '100%': {
-            opacity: 1,
+            opacity: 1
         }
     }),
 
@@ -29,7 +29,7 @@ var animation = {
             opacity: 1
         },
         '100%': {
-            opacity: 0,
+            opacity: 0
         }
     }),
 
@@ -39,7 +39,7 @@ var animation = {
         },
         '100%': {
             opacity: 0.9
-        },
+        }
     }),
 
     hideBackdropAnimation: insertKeyframesRule({
@@ -72,7 +72,7 @@ module.exports = modalFactory({
             },
             '100%': {
                 'stroke-dashoffset': 0
-            },
+            }
         });
 
 
@@ -141,6 +141,6 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationName: willHidden ? hideContentAnimation : showContentAnimation,
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
-        })
+        });
     }
 });

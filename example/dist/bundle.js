@@ -450,7 +450,7 @@ var animation = {
         },
         '100%': {
             opacity: 0.9
-        },
+        }
     }),
 
     hideBackdropAnimation: insertKeyframesRule({
@@ -552,7 +552,7 @@ var animation = {
         '100%': {
             opacity: 0,
             transform: 'translate3d(calc(100vw + 50%), 0, 0)'
-        },
+        }
     }),
 
     showBackdropAnimation: insertKeyframesRule({
@@ -561,7 +561,7 @@ var animation = {
         },
         '100%': {
             opacity: 0.9
-        },
+        }
     }),
 
     hideBackdropAnimation: insertKeyframesRule({
@@ -642,13 +642,13 @@ var animation = {
     },
     showContentAnimation: insertKeyframesRule({
         '0%': {
-            opacity: 0,
+            opacity: 0
         },
         '40%':{
             opacity: 0
         },
         '100%': {
-            opacity: 1,
+            opacity: 1
         }
     }),
 
@@ -657,7 +657,7 @@ var animation = {
             opacity: 1
         },
         '100%': {
-            opacity: 0,
+            opacity: 0
         }
     }),
 
@@ -667,7 +667,7 @@ var animation = {
         },
         '100%': {
             opacity: 0.9
-        },
+        }
     }),
 
     hideBackdropAnimation: insertKeyframesRule({
@@ -700,7 +700,7 @@ module.exports = modalFactory({
             },
             '100%': {
                 'stroke-dashoffset': 0
-            },
+            }
         });
 
 
@@ -769,7 +769,7 @@ module.exports = modalFactory({
             animationFillMode: 'forwards',
             animationName: willHidden ? hideContentAnimation : showContentAnimation,
             animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
-        })
+        });
     }
 });
 
@@ -814,7 +814,7 @@ var animation = {
         },
         '100%': {
             opacity: 0.9
-        },
+        }
     }),
 
     hideBackdropAnimation: insertKeyframesRule({
@@ -1049,7 +1049,7 @@ var animation = {
         '100%': {
             opacity: 0,
             transform: 'scale3d(0.8, 0.8, 1)'
-        },
+        }
     }),
 
     showBackdropAnimation: insertKeyframesRule({
@@ -1058,7 +1058,7 @@ var animation = {
         },
         '100%': {
             opacity: 0.9
-        },
+        }
     }),
 
     hideBackdropAnimation: insertKeyframesRule({
@@ -1151,7 +1151,7 @@ module.exports = function (animation) {
             closeOnClick: React.PropTypes.bool,
             modalStyle: React.PropTypes.object,
             backdropStyle: React.PropTypes.object,
-            contentStyle: React.PropTypes.object,
+            contentStyle: React.PropTypes.object
         },
 
         getDefaultProps: function () {
@@ -1165,7 +1165,7 @@ module.exports = function (animation) {
                 closeOnClick: true,
                 modalStyle: {},
                 backdropStyle: {},
-                contentStyle: {},
+                contentStyle: {}
             };
         },
 
@@ -1342,7 +1342,7 @@ module.exports = {
     FlyModal: require('./FlyModal'),
     FadeModal: require('./FadeModal'),
     ScaleModal: require('./ScaleModal'),
-    OutlineModal: require('./OutlineModal'),
+    OutlineModal: require('./OutlineModal')
 }
 
 },{"./DropModal":9,"./FadeModal":10,"./FlyModal":11,"./OutlineModal":12,"./ScaleModal":13,"./WaveModal":14}]},{},[]);

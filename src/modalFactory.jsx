@@ -17,7 +17,7 @@ module.exports = function (animation) {
             closeOnClick: React.PropTypes.bool,
             modalStyle: React.PropTypes.object,
             backdropStyle: React.PropTypes.object,
-            contentStyle: React.PropTypes.object,
+            contentStyle: React.PropTypes.object
         },
 
         getDefaultProps: function () {
@@ -31,7 +31,7 @@ module.exports = function (animation) {
                 closeOnClick: true,
                 modalStyle: {},
                 backdropStyle: {},
-                contentStyle: {},
+                contentStyle: {}
             };
         },
 

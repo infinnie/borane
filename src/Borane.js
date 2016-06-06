@@ -4,5 +4,5 @@ module.exports = {
     FlyModal: require('./FlyModal'),
     FadeModal: require('./FadeModal'),
     ScaleModal: require('./ScaleModal'),
-    OutlineModal: require('./OutlineModal'),
+    OutlineModal: require('./OutlineModal')
 }
