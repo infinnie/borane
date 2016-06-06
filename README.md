@@ -52,6 +52,8 @@ var Example = React.createClass({
     }
 });
 ```
+### Using Borane on IE 8
+In order to use Borane on IE 8, it might be needed to include ES5-shim/ES5-sham before other JavaScript code, and set `process.env.NODE_ENV` to `"production"` when packaging React. However you can directly use react.min.js and skip those steps.
 
 ## Props
 
@@ -65,7 +67,7 @@ var Example = React.createClass({
 * backdropStyle - CSS styles to apply to the backdrop
 * contentStyle - CSS styles to apply to the modal's content
 
-# Custom Styles
+## Custom Styles
 Objects consisting of CSS properties/values can be passed as props to the Modal component.
 The values for the CSS properties will either add new properties or override the default property value set for that Modal type.
 
